@@ -5,12 +5,15 @@
           twidth, theight,
           fx1, fy1, fx2, fy2,
           width, height, top, left,
+          ay, ax,
           $this = $(this);
 
       owidth = $this.width();
       oheight = $this.height();
       twidth = $this.parent().width();
       theight = $this.parent().height();
+      ay = $this.attr('data-align-y');
+      ax = $this.attr('data-align-x');
       fx1 = Number($this.attr('data-focus-left'));
       fy1 = Number($this.attr('data-focus-top'));
       fx2 = Number($this.attr('data-focus-right'));
@@ -21,7 +24,14 @@
           height = oheight*twidth/fwidth;
           width = owidth*twidth/fwidth;
           left = -fx1*width;
-          top = (theight-height)/2;
+
+          if(ay == 'top'){
+            top = 0;
+          }else if(ay == 'bottom'){
+            top = theight - height;
+          }else{
+            top = (theight-height)/2;
+          }
         } else {
           height = theight;
           width = theight*owidth/oheight;
@@ -39,7 +49,14 @@
           width = owidth*theight/fheight;
           height = oheight*theight/fheight;
           top = -fy1*height;
-          left = (twidth-width)/2;
+
+          if(ax == 'left'){
+            left = 0;
+          }else if(ax == 'right'){
+            left = twidth - width;
+          }else{
+            left = (twidth-width)/2;
+          }
         } else {
           width = twidth;
           height = twidth*oheight/owidth;
